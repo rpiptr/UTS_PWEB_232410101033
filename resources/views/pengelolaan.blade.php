@@ -1,33 +1,3 @@
-{{-- @extends('layouts.app')
-@section('title', 'Pengelolaan')
-
-@section('content')
-    <div>
-        <h2>Daftar Buku</h2>
-
-        <table border="1" cellpadding="10">
-            <thead>
-                <tr>
-                    <th>Judul</th>
-                    <th>Penulis</th>
-                    <th>Kategori</th>
-                    <th>Tahun</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($buku as $item)
-                    <tr>
-                        <td>{{ $item['judul'] }}</td>
-                        <td>{{ $item['penulis'] }}</td>
-                        <td>{{ $item['genre'] }}</td>
-                        <td>{{ $item['tahun'] }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-@endsection --}}
-
 @extends('layouts.app')
 @section('title', 'Pengelolaan')
 
