@@ -9,8 +9,9 @@
 </head>
 <body class="min-h-screen flex flex-col">
     @include('components.navbar')
-
-    @yield('content')
+    <main>
+        @yield('content')
+    </main>
 
     @include('components.footer')
 </body>

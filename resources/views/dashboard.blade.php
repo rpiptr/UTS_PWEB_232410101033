@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-6 text-gray-800">Welcome to your Dashboard, {{ $username }}!</h1>
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">Welcome to <span class="text-blue-600 text-4xl">Litera</span>, {{ $username }}!</h1>
     <p class="text-gray-600 mb-8">Here, you can manage your books and view your profile information.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">

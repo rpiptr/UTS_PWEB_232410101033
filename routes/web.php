@@ -14,14 +14,14 @@ use App\Http\Controllers\PageController;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', [PageController::class, 'showLogin'])->name('login');
 
-Route::post('/', [PageController::class, 'submit']);
+Route::post('/login', [PageController::class, 'submit'])->name('submit');
 
 Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/profile', [PageController::class, 'profile'])->name('profile');
 
 Route::get('/pengelolaan', [PageController::class, 'showListBuku'])->name('pengelolaan');
+
+Route::post('/logout', [PageController::class, 'logout'])->name('logout');

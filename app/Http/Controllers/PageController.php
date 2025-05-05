@@ -6,6 +6,26 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+    private $akun = [
+        [
+            'username' => 'raffy123',
+            'password' => '654321',
+            'email' => 'raffy@gmail.com',
+            'no_hp' => '08123456789',
+            'alamat' => 'Jakarta, Indonesia'
+        ],
+        [
+            'username' => 'rpiptr',
+            'password' => '123456',
+            'email' => 'rpiptr@gmail.com',
+            'no_hp' => '0895704146447',
+            'alamat' => 'Sidoarjo, Jawa Timur'
+        ]
+    ];
+
+    public function showLogin (){
+        return view('login');
+    }
     public function submit(Request $request) {
         $request->validate([
             'username' => 'required',
@@ -15,8 +35,10 @@ class PageController extends Controller
         $username = $request->input('username');
         $password = $request->input('password');
 
-        if (($username === 'raffy123' || $username === 'rpiptr') && $password === '123456') {
-            return redirect()->route('dashboard', ['username' => $username]);
+        foreach ($this->akun as $akun) {
+            if ($akun['username'] === $username && $akun['password'] === $password) {
+                return redirect()->route('dashboard', ['username' => $akun['username']]);
+            }
         }
 
         return back()->withErrors(['login' => 'The username or password you entered is incorrect. Please try again.'])->withInput();
@@ -29,7 +51,8 @@ class PageController extends Controller
 
     public function profile(Request $request) {
         $username = $request->query('username');
-        return view('profile', compact('username'));
+        $akun = collect($this->akun)->firstWhere('username', $username);
+        return view('profile', $akun);
     }
 
     public function showListBuku(Request $request){
@@ -37,25 +60,25 @@ class PageController extends Controller
             [
                 'judul' => 'Laskar Pelangi',
                 'penulis' => 'Andrea Hirata',
-                'genre' => 'Fiksi',
+                'genre' => 'Fiction',
                 'tahun' => 2005
             ],
             [
                 'judul' => 'The Hunger Games',
                 'penulis' => 'Suzanne Collins',
-                'genre' => 'Aksi',
+                'genre' => 'Action',
                 'tahun' => 2008
             ],
             [
                 'judul' => 'The Midnight Library',
                 'penulis' => 'Matt Haig',
-                'genre' => 'Fantasi',
+                'genre' => 'Fantasy',
                 'tahun' => 2020
             ],
             [
                 'judul' => 'It Ends with Us',
                 'penulis' => 'Colleen Hoover',
-                'genre' => 'Romansa',
+                'genre' => 'Romance',
                 'tahun' => 2016
             ],
             [
@@ -67,17 +90,45 @@ class PageController extends Controller
             [
                 'judul' => 'Nebula',
                 'penulis' => 'Tere Liye',
-                'genre' => 'Petualangan',
+                'genre' => 'Adventure',
                 'tahun' => 2020
             ],
             [
                 'judul' => 'Pulang',
                 'penulis' => 'Leila S. Chudori',
-                'genre' => 'Fiksi Sejarah',
+                'genre' => 'Historical Fiction',
                 'tahun' => 2012
+            ],
+            [
+                'judul' => 'Aku Juga Ingin Dianggap',
+                'penulis' => 'Wulan Dwi Biraeng',
+                'genre' => 'Drama',
+                'tahun' => 2022
+            ],
+            [
+                'judul' => 'Laut Bercerita',
+                'penulis' => 'Leila S. Chudori',
+                'genre' => 'Historical Fiction',
+                'tahun' => 2017
+            ],
+            [
+                'judul' => 'The Night Circus',
+                'penulis' => 'Erin Morgenstern',
+                'genre' => 'Fantasy',
+                'tahun' => 2011
+            ],
+            [
+                'judul' => 'It Ends with Us',
+                'penulis' => 'Colleen Hoover',
+                'genre' => 'Romance',
+                'tahun' => 2016
             ]
         ];
         $username = $request->query('username');
         return view('pengelolaan', compact('buku', 'username'));
+    }
+
+    public function logout() {
+        return redirect()->route('login');
     }
 }
