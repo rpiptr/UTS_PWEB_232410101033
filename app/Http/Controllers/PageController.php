@@ -26,6 +26,7 @@ class PageController extends Controller
     public function showLogin (){
         return view('login');
     }
+    
     public function submit(Request $request) {
         $request->validate([
             'username' => 'required',
